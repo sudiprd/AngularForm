@@ -1,0 +1,92 @@
+<div>
+  <h1>Student Registration</h1>
+  <h5>using Template-Driven Form</h5>
+</div>
+
+<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
+  <div class="form-group">
+    <label for="firstname">First Name</label>
+    <input type="text" class="form-control" id="firstname" placeholder="Enter your First Name" required minlength="3"
+      pattern="^[a-zA-Z]+$" autocomplet="off" #firstname="ngModel" [(ngModel)]="user.firstname" name="firstname" />
+    <div *ngIf="!firstname?.valid && (firstname?.dirty || firstname?.touched)" class="alert alert-danger">
+      <div *ngIf="firstname.errors && firstname.errors['required']">
+        Field is required
+      </div>
+      <div *ngIf="firstname.errors && firstname.errors['minlength']">
+        Minimum 3 is required
+      </div>
+      <div *ngIf="firstname.errors && firstname.errors['pattern']">
+        Must not have alphanumeric
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="lastname">Last Name</label>
+    <input type="text" class="form-control" id="lastname" placeholder="Enter your Last Name" required minlength="3"
+      pattern="^[a-zA-Z]+$" autocomplet="off" #lastname="ngModel" [(ngModel)]="user.lastname" name="lastname" />
+    <div *ngIf="!lastname?.valid && (lastname?.dirty || lastname?.touched)" class="alert alert-danger">
+      <div *ngIf="lastname.errors && lastname.errors['required']">
+        Field is required
+      </div>
+      <div *ngIf="lastname.errors && lastname.errors['minlength']">
+        Minimum 3 is required
+      </div>
+      <div *ngIf="lastname.errors && lastname.errors['pattern']">
+        Must not have alphanumeric
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" placeholder="Enter your Email" required
+      pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" autocomplet="off" #email="ngModel" [(ngModel)]="user.email"
+      name="email" />
+    <div *ngIf="!email?.valid && (email?.dirty || email?.touched)" class="alert alert-danger">
+      <div *ngIf="email.errors && email.errors['required']">
+        Field is required
+      </div>
+      <div *ngIf="email.errors && email.errors['pattern']">
+        Email is not valid.
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="gender">Gender : </label><br />
+    <input type="radio" value="male" [(ngModel)]="user.gender" name="gender" required #gender="ngModel" />
+    Male
+
+    <input type="radio" value="female" [(ngModel)]="user.gender" name="gender" required #gender="ngModel" />
+    Female
+    <div *ngIf="!gender?.valid && (gender?.dirty || gender?.touched)" class="alert alert-danger">
+      <div *ngIf="gender.errors && gender.errors['required']">
+        Field is required
+      </div>
+    </div>
+  </div>
+  <br />
+
+
+  <div class="form-group">
+    <label for="hobbies">Hobbies : </label>
+    <div *ngFor="let hobby of hobbieList" >
+        <input type="checkbox" name="hobbies" class= "form-control" value= "hobbies" ([ngModel])="user.hobbies" required #hobbies= "ngModel">
+        <label>{{ hobby.name }}</label>
+  </div>
+  <div *ngIf="!hobbies.valid && (hobbies.dirty || hobbies.touched)" class="alert alert-danger"> 
+        <div *ngIf="hobbies.errors && hobbies.errors['required']">
+            Checkbox is required, select atleast one.
+          </div>
+    </div>
+  </div>
+
+
+  <div style="margin-top: 10px">
+    <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">
+      Login
+    </button>
+    <a type="register" class="btn btn-link">Register </a>
+  </div>
+
+</form>
