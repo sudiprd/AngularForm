@@ -73,13 +73,14 @@
     <div *ngFor="let hobby of hobbieList" >
         <input type="checkbox" name="hobbies" class= "form-control" value= "hobbies" ([ngModel])="user.hobbies" required #hobbies= "ngModel">
         <label>{{ hobby.name }}</label>
-  </div>
+
   <div *ngIf="!hobbies.valid && (hobbies.dirty || hobbies.touched)" class="alert alert-danger"> 
         <div *ngIf="hobbies.errors && hobbies.errors['required']">
             Checkbox is required, select atleast one.
           </div>
     </div>
   </div>
+</div>
 
 
   <div style="margin-top: 10px">
