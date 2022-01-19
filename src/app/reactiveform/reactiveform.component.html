@@ -1,26 +1,59 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-<form [formGroup] ="loginForm" (ngSubmit)= "onSubmit()">
-
-      <div class="form-group">
-        <label for="firstname">First Name</label>
-        <input type="text" class="form-control" id="firstname" name ="firstname" placeholder="Enter First Name" 
-            formControlName="firstname">
+  <div class="form-group">
+    <label for="name">User Name</label>
+    <input type="text" class="form-control" placeholder="Enter Full Name" formControlName="name" />
+    <div *ngIf="Control['name'].touched && Control['name'].errors" class="alert alert-danger">
+      <div *ngIf="Control['name'].errors['required']">Name is Required</div>
+      <div *ngIf="Control['name'].errors['minlength']">
+        Full Name must be at least 3 characters
       </div>
-  
-      <div class="form-group">
-        <label for="lastname">Last Name</label>
-        <input type="text" class="form-control" id="lastname" name ="lastname" placeholder="Enter Last Name"
-            formControlName="lastname">
-      </div>
-  
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" name ="email" placeholder="Enter your Email" 
-            formControlName="email">
-      </div>
-  
-      <div style="margin-top: 10px;">
-        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-  
-    </form> 
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" placeholder="Enter your Email"
+      formControlName="email"  pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+    <div *ngIf="Control['email'].touched && Control['email'].errors" class="alert alert-danger">
+
+      <div *ngIf="Control['email'].errors['required']">Email is Required</div>
+      <div *ngIf="Control['email'].errors['pattern']">
+        Email is not Valid
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="number">Mobile Number</label>
+    <input type="number" class="form-control" placeholder="Enter your Mobile Number" />
+
+    <div *ngIf="Control['number'].touched && Control['number'].errors" class="alert alert-danger">
+
+      <div *ngIf="Control['number'].errors['required']">Mobile Number is Required</div>
+      <div *ngIf="Control['number'].errors['minlength']">
+        Mobile Number must be 10 digit
+      </div>
+      <div *ngIf="Control['number'].errors['maxlength']">
+        Mobile Number must be 10 digit
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="country">Country</label>
+    <select class="form-control" name="country" formControlName="countryId">
+      <option value="">-- Select Country --</option>
+      <option [value]="country.id" *ngFor="let country of countries">{{country.name}}</option>
+    </select>
+  </div>
+
+  <div class="form-group purple-border">
+    <label for="exampleFormControlTextarea4">Message Area</label>
+    <textarea class="form-control"  rows="3"></textarea>
+  </div>
+
+  <div style="margin-top: 10px;">
+    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button>
+  </div>
+
+</form>

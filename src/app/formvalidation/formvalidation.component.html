@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <h1>Student Registration</h1>
   <h5>using Template-Driven Form</h5>
 </div>
@@ -71,7 +71,7 @@
   <div class="form-group">
     <label for="hobbies">Hobbies : </label>
     <div *ngFor="let hobby of hobbieList" >
-        <input type="checkbox" name="hobbies" class= "form-control" value= "hobbies" ([ngModel])="user.hobbies" required #hobbies= "ngModel">
+        <input type="checkbox" name="hobbies" class= "form-control" #hobbies= "ngModel" value= "hobbies" ([ngModel])="user.hobbies" required >
         <label>{{ hobby.name }}</label>
 
   <div *ngIf="!hobbies.valid && (hobbies.dirty || hobbies.touched)" class="alert alert-danger"> 
@@ -90,4 +90,4 @@
     <a type="register" class="btn btn-link">Register </a>
   </div>
 
-</form>
+</form> -->
